@@ -9,7 +9,7 @@ use x86_64::{
 		FrameAllocator
 	},
 };
-use bootloader::bootinfo::{ MemoryMap, MemoryRegionType };
+use bootloader::bootinfo::{MemoryMap, MemoryRegionType};
 
 /// Returns a mutable reference to the active level 4 table.
 ///

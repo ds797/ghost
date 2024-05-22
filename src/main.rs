@@ -8,8 +8,8 @@ extern crate alloc;
 
 use core::panic::PanicInfo;
 use alloc::boxed::Box;
-use alloc::{ vec, vec::Vec, rc::Rc };
-use bootloader::{ entry_point, BootInfo };
+use alloc::{vec, vec::Vec, rc::Rc};
+use bootloader::{entry_point, BootInfo};
 use ghost::{allocator, println};
 use ghost::task::{simple_executor::SimpleExecutor, Task};
 
@@ -30,7 +30,7 @@ fn panic(info: &PanicInfo) -> ! {
 entry_point!(kernel_main);
 
 fn kernel_main(boot_info: &'static BootInfo) -> ! {
-	use ghost::{ memory, memory::BootInfoFrameAllocator };
+	use ghost::{memory, memory::BootInfoFrameAllocator};
 	use x86_64::VirtAddr;
 
 	println!("WELCOME_TO_GHOST{}", "!");

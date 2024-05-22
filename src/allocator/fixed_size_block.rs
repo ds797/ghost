@@ -1,7 +1,7 @@
 use super::Locked;
 use alloc::alloc::Layout;
 use alloc::alloc::GlobalAlloc;
-use core::{ mem, ptr, ptr::NonNull };
+use core::{mem, ptr, ptr::NonNull};
 
 /// The block sizes to use.
 ///

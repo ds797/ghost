@@ -7,7 +7,7 @@
 extern crate alloc;
 
 use core::panic::PanicInfo;
-use bootloader::{ entry_point, BootInfo };
+use bootloader::{entry_point, BootInfo};
 use alloc::boxed::Box;
 use alloc::vec::Vec;
 use ghost::allocator::HEAP_SIZE;
@@ -16,7 +16,7 @@ entry_point!(main);
 
 fn main(boot_info: &'static BootInfo) -> ! {
 	use ghost::allocator;
-	use ghost::memory::{ self, BootInfoFrameAllocator };
+	use ghost::memory::{self, BootInfoFrameAllocator};
 	use x86_64::VirtAddr;
 
 	ghost::init();
