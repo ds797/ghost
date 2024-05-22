@@ -11,6 +11,7 @@ use alloc::boxed::Box;
 use alloc::{ vec, vec::Vec, rc::Rc };
 use bootloader::{ entry_point, BootInfo };
 use ghost::{allocator, println};
+use ghost::task::{simple_executor::SimpleExecutor, Task};
 
 // Defines panic functions since we no longer have access to std
 #[cfg(not(test))]
@@ -62,10 +63,25 @@ fn kernel_main(boot_info: &'static BootInfo) -> ! {
 	core::mem::drop(reference_counted);
 	println!("reference count is {} now", Rc::strong_count(&cloned_reference));
 
+	println!("asynchronous testing...");
+
+	let mut executor = SimpleExecutor::new();
+	executor.spawn(Task::new(example_task()));
+	executor.run();
+
 	#[cfg(test)]
 	test_main();
 
 	println!("It didn't crash!");
 
 	ghost::hlt_loop();
+}
+
+async fn async_number() -> u32 {
+	42
+}
+
+async fn example_task() {
+	let number = async_number().await;
+	println!("async number: {}", number);
 }
