@@ -10,6 +10,7 @@ use core::panic::PanicInfo;
 use alloc::boxed::Box;
 use alloc::{vec, vec::Vec, rc::Rc};
 use bootloader::{entry_point, BootInfo};
+use ghost::task::keyboard;
 use ghost::{allocator, println};
 use ghost::task::{simple_executor::SimpleExecutor, Task};
 
@@ -67,6 +68,7 @@ fn kernel_main(boot_info: &'static BootInfo) -> ! {
 
 	let mut executor = SimpleExecutor::new();
 	executor.spawn(Task::new(example_task()));
+	executor.spawn(Task::new(keyboard::print_keypresses()));
 	executor.run();
 
 	#[cfg(test)]
