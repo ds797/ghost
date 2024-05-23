@@ -12,7 +12,7 @@ use alloc::{vec, vec::Vec, rc::Rc};
 use bootloader::{entry_point, BootInfo};
 use ghost::task::keyboard;
 use ghost::{allocator, println};
-use ghost::task::{simple_executor::SimpleExecutor, Task};
+use ghost::task::{executor::Executor, Task};
 
 // Defines panic functions since we no longer have access to std
 #[cfg(not(test))]
@@ -66,7 +66,7 @@ fn kernel_main(boot_info: &'static BootInfo) -> ! {
 
 	println!("asynchronous testing...");
 
-	let mut executor = SimpleExecutor::new();
+	let mut executor = Executor::new();
 	executor.spawn(Task::new(example_task()));
 	executor.spawn(Task::new(keyboard::print_keypresses()));
 	executor.run();
